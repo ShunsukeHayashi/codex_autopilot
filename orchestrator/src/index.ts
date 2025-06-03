@@ -61,8 +61,8 @@ webhooks.on('pull_request.opened', async ({ payload }) => {
   }));
 });
 
-webhooks.on('pull_request.merged', async ({ payload }) => {
-  if (payload.pull_request.merged) {
+webhooks.on('pull_request.closed', async ({ payload }) => {
+  if (payload.pull_request?.merged) {
     console.log(`PR merged: ${payload.pull_request.title}`);
     
     // Add to both LINE and Discord queues for notifications

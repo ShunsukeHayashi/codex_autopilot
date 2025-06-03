@@ -2,14 +2,14 @@ FROM node:22-alpine
 
 WORKDIR /app
 
+# Copy package files
 COPY package*.json ./
-COPY tsconfig.json ./
 
 # Install dependencies
-RUN npm ci
+RUN npm install
 
 # Copy source code
-COPY orchestrator ./orchestrator
+COPY . .
 
 # Build TypeScript
 RUN npm run build:orchestrator
