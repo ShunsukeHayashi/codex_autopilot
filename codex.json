@@ -1,0 +1,16 @@
+{
+  "policy": "full-auto",
+  "preferred_branch": "codex/${hash}",
+  "test_command": "npm test",
+  "auto_approve": ["README.md", "docs/**"],
+  "model": "o4-mini",
+  "theme": "dark",
+  "hooks": {
+    "post_pr_create": "curl -X POST ${MCP_WEBHOOK_URL}/github -H 'Content-Type: application/json' -d '{\"event\": \"pr_created\", \"repository\": \"${GITHUB_REPOSITORY}\", \"pr_number\": ${PR_NUMBER}}'"
+  },
+  "safety": {
+    "restricted_paths": [".env", ".env.*", "**/*.key", "**/*.pem"],
+    "max_files_changed": 10,
+    "approve_on_success": true
+  }
+}
